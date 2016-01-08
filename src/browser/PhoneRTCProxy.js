@@ -317,7 +317,10 @@ module.exports = {
         localVideoView.muted = true;
         localVideoView.style.position = 'absolute';
         localVideoView.style.zIndex = 999;
-        localVideoView.addEventListener("loadedmetadata", scaleToFill);
+        
+	//TODO add a strategy choice into config to switch { scaleToFill, scaleToBorder...)
+	//localVideoView.addEventListener("loadedmetadata", scaleToFill);
+        localVideoView.addEventListener("loadedmetadata", scaleToBorder);
 
         refreshLocalVideoView();
 
@@ -365,7 +368,11 @@ module.exports = {
 function addRemoteStream(stream) {
   var videoView = document.createElement('video');
   videoView.autoplay = true;
-  videoView.addEventListener("loadedmetadata", scaleToFill);
+
+  //TODO add a strategy choice into config to switch { scaleToFill, scaleToBorder... }
+  //videoView.addEventListener("loadedmetadata", scaleToFill);
+  videoView.addEventListener("loadedmetadata", scaleToBorder;
+
   videoView.style.position = 'absolute';
   videoView.style.zIndex = 998;
 
@@ -442,6 +449,11 @@ function refreshLocalVideoView() {
 
   localVideoView.style.top = 
     (videoConfig.containerParams.position[1] + videoConfig.local.position[1]) + 'px';       
+}
+
+function scaleToBorder(event) {
+  //TODO
+  // do nothing to avoid wrong aspect ratio !  
 }
 
 function scaleToFill(event) {
